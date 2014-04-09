@@ -56,13 +56,19 @@
 
 \title{	
 \normalfont \normalsize 
-\textsc{university, school or department name} \\ [25pt] % Your university, school and/or department name(s)
+\textsc{National Institute of Technology, Goa} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge Assignment Title \\ % The assignment title
+\huge Abstractive Text Summarization \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
-\author{John Smith} % Your name
+\author{Dhruv Jawali, Vighnesh Birodkar \\
+\\
+\small{under the guidance of} \\
+\\
+\\
+Mrs. Veena T
+} % Your name
 
 \date{\normalsize\today} % Today's date or a custom date
 
@@ -73,82 +79,22 @@
 \pagebreak
 \tableofcontents
 \pagebreak
-%----------------------------------------------------------------------------------------
-%	PROBLEM 1
-%----------------------------------------------------------------------------------------
 
-\section{Problem title}
 
-\lipsum[2] % Dummy text
 
-\begin{align} 
-\begin{split}
-(x+y)^3 	&= (x+y)^2(x+y)\\
-&=(x^2+2xy+y^2)(x+y)\\
-&=(x^3+2x^2y+xy^2) + (x^2y+2xy^2+y^3)\\
-&=x^3+3x^2y+3xy^2+y^3
-\end{split}					
-\end{align}
 
-Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
-
-%------------------------------------------------
-
-\subsection{Heading on level 2 (subsection)}
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-\begin{align}
-A = 
-\begin{bmatrix}
-A_{11} & A_{21} \\
-A_{21} & A_{22}
-\end{bmatrix}
-\end{align}
-Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-
-%------------------------------------------------
-
-\subsubsection{Heading on level 3 (subsubsection)}
-
-\lipsum[3] % Dummy text
-
-\paragraph{Heading on level 4 (paragraph)}
-
-\lipsum[6] % Dummy text
-
-%----------------------------------------------------------------------------------------
-%	PROBLEM 2
+\section{Introduction}
+\emph{Information Explosion} \cite{fshock} refers to the rapid increase in the amount of published information or data and the effects of this abundance. The internet now consists of at least 4.3 billion web pages \cite{websize}. With each passing day, this number will keep on increasing. Storing and interpreting the ever increasing amount of data is going to be a challenge in the near future.\\
+\par
+Computers are ideal for storing and manipulating data, but lack the means to interpret it. Formally defining Context Free Grammars for human languages hasn't yet been possible. As a result in the present scenario, the task of understanding and interpreting text data is a task primarily limitied to human subjects. Although data on the internet keeps growing exponentially, the same is not true for the humans responsible for overseeing the relevant data.A typical example would be interpreting the customer reviews when a new product is launched.\\
+\par
+Untill computers are capable of interpreting human languages, humans must be kept in the loop. We need a system to limit the data the humans have to oversee, without omitting important facts. This is acheieved through \emph{Text Summarization Techniques}
 %----------------------------------------------------------------------------------------
 
-\section{Lists}
-
-%------------------------------------------------
-
-\subsection{Example of list (3*itemize)}
-\begin{itemize}
-	\item First item in a list 
-		\begin{itemize}
-		\item First item in a list 
-			\begin{itemize}
-			\item First item in a list 
-			\item Second item in a list 
-			\end{itemize}
-		\item Second item in a list 
-		\end{itemize}
-	\item Second item in a list 
-\end{itemize}
-
-%------------------------------------------------
-
-\subsection{Example of list (enumerate)}
-\begin{enumerate}
-\item First item in a list 
-\item Second item in a list 
-\item Third item in a list
-\end{enumerate}
 
 
+\bibliography{mybib}{}
+\bibliographystyle{plain}
 
-%----------------------------------------------------------------------------------------
 
 \end{document}
