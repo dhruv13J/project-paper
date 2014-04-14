@@ -89,9 +89,30 @@ Mrs. Veena T
 Computers are ideal for storing and manipulating data, but lack the means to interpret it. Formally defining Context Free Grammars for human languages hasn't yet been possible. As a result in the present scenario, the task of understanding and interpreting text data is a task primarily limitied to human subjects. Although data on the internet keeps growing exponentially, the same is not true for the humans responsible for overseeing the relevant data.A typical example would be interpreting the customer reviews when a new product is launched.\\
 \par
 Untill computers are capable of interpreting human languages, humans must be kept in the loop. We need a system to limit the data the humans have to oversee, without omitting important facts. This is acheieved through \emph{Text Summarization Techniques}
-%----------------------------------------------------------------------------------------
+%TODO reference here
+%---------------------------------------------------------------------------------------
+\section{Text Summarization}
+%TODO ref
+Text summarization is the process of scanning a document, or a set of documents and producing a relatively shorter summary of it capturing the important ideas expressed as much as possible. Since summaries are interpreted by humans and are subject to human evaluations. Therefore for a given input text, what an ideally summary would be varies from person to person. Most text summarization approaches define and try to optimize statistical criteria to select sentences from the document to be used for composing the final summary.%TODO ref
+Text Summarization has broadly been classified into two of the following types. %TODO ref
+\subsection{Extractive Text Summarization}
+Given a document $D$ of $n$ sentences and a compression ratio $ 0 < r < 1 $ an \emph{Extractive Summarization Technique} selects $\lceil n \times r \rceil $  sentences which it think best represnt the document. It is called \emph{Extractive} summarization because it involves merely selecting sentences from the original document
 
+%TODO describe text rank and one other approach here.
+\subsection{Abstractive Text Summarization}
+Given a document $D$ of $n$ sentences and a compression ratio $ 0 < r < 1 $ an \emph{Abstractive Summarization Technique} produces $\lceil n \times r \rceil $  sentences which it think best represnt the document. The senteces may or may not be from the document. This approach is more likely to produce an accurate summary because it can represent facts with new and compact sentences rather than relying upon the sentences in the document. However, this requires that the summarazation technique to be grammar aware. Existing techniques implementing this approach are far from the abstractive capabilities of humans.
 
+%TODO describe corpus and opinosis here
+
+\section{Summarization as a Classification problem}
+\emph{Extractive Summarization} can be thought of as a binary classification problem. Either the sentence in a document gets a label $1$ and is included in the summary, or it gets a label $0$ and is excluded from the summary. If we are able to represent each sentence by a numerical vector, numerous machine learning approaches can be used to assign the labels.
+%TODO ref some ml approaches, maybe clustering
+\\
+\par
+As mentioned earlier, an ideal summary can vary depending on the context: the person reading it or the type of document being summarized. A supervised machine learning approach is ideal in such a case. Given a document with labels ( of $0$ and $1$ ) a Machine Learning Technique can be used to learn from it and then predict the labels for each of the sentences of an unseen document. 
+
+\subsection{Drawbacks of the Binary Classification approach}
+According to the above mentioned approach a binary classifier can only be trained using a purely extractive summary. But extractive summaries are not readily available. A machine learning model with 
 
 \bibliography{mybib}{}
 \bibliographystyle{plain}
