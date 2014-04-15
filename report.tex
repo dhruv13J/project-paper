@@ -109,15 +109,32 @@ Given a document $D$ of $n$ sentences and a compression ratio $ 0 < r < 1 $ an \
 
 %TODO describe corpus and opinosis here
 
-\section{Summarization as a Classification problem}
-\emph{Extractive Summarization} can be thought of as a binary classification problem. Either the sentence in a document gets a label $1$ and is included in the summary, or it gets a label $0$ and is excluded from the summary. If we are able to represent each sentence by a numerical vector, numerous machine learning approaches can be used to assign the labels.
-%TODO ref some ml approaches, maybe clustering
-\\
+\section{Summarization as a Machine Learning problem}
+An extractive summary can never be universal. An ideal summary can vary depending on the context and the evaluator. This is the fundamental drawback of statistical approaches. It assumes that the gist of a document can be captures by statistics alone, leaving aside the variation that comes with the reader and the context of the document.\\
 \par
-As mentioned earlier, an ideal summary can vary depending on the context: the person reading it or the type of document being summarized. A supervised machine learning approach is ideal in such a case. Given a document with labels ( of $0$ and $1$ ) a Machine Learning Technique can be used to learn from it and then predict the labels for each of the sentences of an unseen document. 
+\emph{Machine Learning} is a technique which can take this variation into consideration. A summarizing system can be trained to optimize a different function of the document statistics depending on the context. Since purely extractive summaries are difficult to find, the system will have to be trained on abstractive summaries. Typical training data might include reviews and conclusions, papers and abstracts or movie plots and synopsis.\\
+\par
+Firstly we need to represent each sentence as a vector. Each component of this vector can represent a global or local feature of a sentence. The significance of a sentence in the a summary can be thought of as a function of this vector. This can be approximated by appropriate machine learning and regression techniques. \\
+\par
+The more complex a machine learning technique gets, the more training it requires. Purely extractive summaries are difficult to find. Heance we need a statistical measure to represent the importance of a sentence in a document given it's abstractive summary. This importance can be thought of as a function of the above mentioned vector. \\
+\par
+The approach can be summarized as below.\\
+\\
+\textbf{ Training Phase }
+	\begin{itemize}
+		\item Represent each sentence as a vector of features.
+		\item Given a document and it's abstractive summary compute \emph{importance} of each sentence.
+		\item Train a Regression Model to approximate the \emph{importance} of a sentence given it's feature vector.
+	\end{itemize}
 
-\subsection{Drawbacks of the Binary Classification approach}
-According to the above mentioned approach a binary classifier can only be trained using a purely extractive summary. But extractive summaries are not readily available. A machine learning model with 
+\textbf{ Prediction Phase }
+	\begin{itemize}
+		\item Represent each sentence as a vector of features.
+		\item Used the train model to compute the \emph{importance} of a sentence.
+		\item Order sentences by their \emph{importance} for the summary.
+	\end{itemize}
+
+
 
 \bibliography{mybib}{}
 \bibliographystyle{plain}
