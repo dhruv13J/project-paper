@@ -20,6 +20,21 @@
 
 \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
 
+\usepackage[english]{babel}
+\usepackage{graphicx}
+
+\usepackage{color}
+\definecolor{bg_text}{rgb}{0.8,0.8,0.8}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+\usepackage{listings}
+\lstset{
+numbers=left,
+language={},
+backgroundcolor=\color{bg_text}
+}
+
+
 \usepackage{makeidx}
 \usepackage{color}
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
@@ -134,10 +149,79 @@ The approach can be summarized as below.\\
 		\item Order sentences by their \emph{importance} for the summary.
 	\end{itemize}
 
+\section{Our Approach}
+\subsection{Definitions}
+\textbf{\textit{Sentence}} $S$ is sequence of words $(w_1, w_2, ...... w_m )$ where $m$ is the number of words in the sentence. Length of a \textbf{\textit{Sentence}} $S$ is also abbrivated by the notation $|S|$ . For calculation purposes each word is represented by it's lowercase representation. Punctutations in sentences are not considered.\\
+
+\textbf{\textit{Document}} $D$ is a sequence of \emph{Sentences} $(S_1, S_2, ......... S_n)$ where $n$ is the number of sentences in the document. Length of a \textbf{\textit{Document}} is also abbrivated by the notation $|D|$. \\
+
+\textbf{\textit{Similarity}} between any two sentences $S_i$ and $S_j$ is defined as 
+\begin{align}
+ Similarity(S_i,S_j) =  { \cfrac{ |\{w_k | w_k \in S_i \&w_k \in S_j\}| }{log(|S_i|) + log(|S_j|)} }
+\end{align}
+
+\subsection{Importance}
+To be able to train our model we need to define how important a sentence in a document is with respect to it's abstractive summary. We need a measure of how much a sentence has contributed to the summary. We do thiis by taking the maximum of similarity. We compute the similarity of a sentence in a document will all the sentences in the summary and take the maximum of all of them. So the importance of a sentence given it's summary is defined as how similar it is to the most similar sentence in the summary.\\
+\par
+Let $D_t$ be the Document representing the document text and $D_s$ be the document representing it's respective summary.\\
+
+For $S_i \in D_t$ 
+\begin{align}
+Importance(S_i,D_s) = max(\ \{\ Similarity(S_i,S_j)\ |\ S_i \in D_s\ \}\ )  
+\end{align}
+
+An important thing to note here is that for two sentences which are mostly similar, the numberator in the expression for \emph{Similarity} increases linearly while the denominator increases logarithmically. Thus, larger sentences in the document matching larger sentences in the  summary get more significance than smaller sentences matching.\\
+\par
+{{\large Example}}
+\\
+\\
+{Document Text ($D_t$)}
+\begin{lstlisting}
+Black holes are regions from which nothing escapes.
+They are formed when large stars burn out.
+Black holes are incredibly dense.
+Hence the escape velocity for objects is very high.
+In fact, the escape velocity is faster than the speed of light.
+Matter going inside a black hole is lost forever.
+They can devour entire planets or stars at a time.
+Black holes are found at the centre of all large galaxies.
+They are difficult to observe because the do not emit light.
+Black holes observed by looking at the light bent by their gravity.
+\end{lstlisting}
+ \vspace{1.2em}
+{Summary Text ($D_s$)}
+\begin{lstlisting}
+Nothing can escape black holes due to the high escape velocity.
+They are formed when stars die out.
+They bend the light due to their graivty.
+\end{lstlisting}
+
+\begin{figure}
+  
+  \centering
+    \includegraphics[width=1\textwidth]{images/importance}
+    \caption{A plot of Importance : Notice how Sentence 3 and Sentence 6 get low importance because the summary does not talk about denisty or matter being lost}
+\end{figure}
+
+\subsection{Sentence Features}
+To be able to apply a regression technique we need to express each sentence as vector. This vector needs to capture the local as well as global significance of the sentence. For our purpose we have used the following 3 features.
+
+\subsection{Text Rank Score}
+To compute Text Rank Scores \cite{textrank} we model each sentence as a vertex in a graph. The Text Rank graph is completely connect, i.e. there is an edge connecting every two pairs of sentences. For a Document $D$, the weight between any two sentences is defined as 
+\begin{align}
+W( S_i,S_j) = W_{ij} = Similarity(S_i,S_j)
+\end{align}
+
+where $S_i,S_j \in D$ \\
+\\
+hello
 
 
-\bibliography{mybib}{}
+
+\pagebreak
+\bibliography{report}{}
 \bibliographystyle{plain}
 
 
 \end{document}
+1
