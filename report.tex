@@ -201,7 +201,7 @@ See Figure ~\ref{fig:importance} for a plot of importance.
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=.8\textwidth]{images/importance}
+    \includegraphics[width=.75\textwidth]{images/importance}
     \caption{A plot of Importance : Notice how Sentence 4,7 and 8 get low importance because the summary doesn't mention density, matter or planets.}
     \label{fig:importance}
 \end{figure}
@@ -221,7 +221,7 @@ The score for each sentence is computed as follows
 \begin{align}
 TR(V_i) = (1 - d)\ +\ d*\sum\limits_{V_j \in Adj(V_i)} \frac{W_{ji}}{\sum\limits_{V_k \in Adj(V_j)} W_{jk}} \times TR(V_j)
 \end{align}
-where $V_i$ is the vertex correcponding to Sentences $S_i$ in Document $D$, $TR(V_i)$ is the TextRank Score of $V_i$ and $Adj(V_i)$ is the set of vertices adjacent to $V_i$. $0 < d < 1$ is the damping factor and is set to $0.85$ \cite{brin}. The scores are computed repetedly till the algorithm converges. Convergence in this case is when the total update in scores over the entire graph, falls below a certain threshold. \\
+where $V_i$ is the vertex correcponding to Sentences $S_i$ in Document $D$, $TR(V_i)$ is the TextRank Score of $V_i$ and $Adj(V_i)$ is the set of vertices adjacent to $V_i$. $0 < d < 1$ is the damping factor and is set to $0.85$ \cite{brin}. The scores are computed repetedly till the algorithm converges. Convergence in this case is when the total update in scores over the entire graph, falls below a certain threshold. High \emph{Text Rank Score} implies that a sentence is talking about concepts which are being discussed elsewhere in the document. A sentnce gets votes from other sentences, but votes from sentnences having more score are more significant.\\
 \par
 {\large Example}
 \begin{lstlisting}
@@ -239,11 +239,11 @@ Batman is commited ridding Gotham of crime.
 \end{lstlisting}  
 
 
-See Figure ~\ref{fig:tr} for a plot of Text Rank. See Figure ~\ref{fig:error} for a plot of Text Rank with iterations. 
+See Figure ~\ref{fig:tr} for a plot of Text Rank. See Figure ~\ref{fig:error} for a plot of Text Rank error with iterations. 
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=.8\textwidth]{images/tr}
+    \includegraphics[width=.75\textwidth]{images/tr}
     \caption{A plot of Text Rank Scores : Notice how Sentence 6 and Sentence 11 get high Text Rank scores because they talk about Wayne Corp and Gotham, which are also talked about elsewhere}
     \label{fig:tr}
 \end{figure}
@@ -256,9 +256,39 @@ See Figure ~\ref{fig:tr} for a plot of Text Rank. See Figure ~\ref{fig:error} fo
     \label{fig:error}
 \end{figure}
 
+\pagebreak
 \subsection{First Sentential Overlap}
-First Sentence Overlap \cite{mead}
+\emph{First Sentence Overlap} \cite{mead} is defined as the similarity between any sentence in the document and the first sentence in the document.Consider the Docouemt $D$ and $S_1,S_i \in D $, First Sentence Overlap is defined as 
+\begin{align}
+FSO(S_i) = Similarity(S_i,S_1)
+\end{align} 
+The First Sentence of a Document is assumed to be it's title. Thus, a sentence with high \emph{First Sentence Overlap} will be talking about the same concept as mentioned in the title and will most likely be coherent with the overall topic of the document.\\
+\par
+{\large Example}
+\begin{lstlisting}
+Tsunami - Death from the seas.
+The literal translation of Tsunami is "harbour wave".
+A Tsunami is triggered by under water seismic activity.
+It is characterized by a series of high waves hitting the coast.
+Its lethality is increased because it can strike without warning.
+A tsunami can be predicted with underwater seismometers.
+Deploying and maintaining them is a challenge.
+\end{lstlisting}
+See Figure ~\ref{fig:fso} for a plot of First Sentence Overlap.
 
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=.8\textwidth]{images/fso}
+    \caption{A plot of First Sentnence Overlap : Notice how Sentence 2, 3 and 6 get have a high value except for the title.}
+    \label{fig:fso}
+\end{figure}
+
+
+\subsection{Gaussian Overlap}
+For a Document $D$ and $S_i \in D$
+\begin{align}
+GaussianOverlap(S_i) =\sum\limits_{j = - \infty}^{\infty} exp \left( \frac{j}{2\sigma^2} \right) \times Similarity(S_i,S_{i+j})
+\end{align}
 \pagebreak
 \bibliography{report}{}
 \bibliographystyle{plain}
